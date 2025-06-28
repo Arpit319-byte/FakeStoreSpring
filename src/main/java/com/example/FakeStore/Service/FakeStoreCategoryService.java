@@ -1,6 +1,6 @@
 package com.example.FakeStore.Service;
 
-import com.example.FakeStore.DTO.ProductDTO;
+import com.example.FakeStore.DTO.CategoryDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 public class FakeStoreCategoryService implements ICategoryService {
 
     @Override
-    public List<ProductDTO> getAllCategory() {
+    public List<CategoryDTO> getAllCategory() {
         return new ArrayList<>();
     }
 }

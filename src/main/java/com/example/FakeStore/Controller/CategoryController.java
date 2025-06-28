@@ -1,6 +1,6 @@
 package com.example.FakeStore.Controller;
 
-import com.example.FakeStore.DTO.ProductDTO;
+import com.example.FakeStore.DTO.CategoryDTO;
 import com.example.FakeStore.Service.ICategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class CategoryController {
     }
 
     @GetMapping
-    public List<ProductDTO> getAllCategories(){
+    public List<CategoryDTO> getAllCategories(){
         return iCategoryService.getAllCategory();
     }
 }
