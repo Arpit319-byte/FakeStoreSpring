@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Builder
 @Component
-public class ProductDTO {
-
-    String productName;
-    String productCategory;
-
+public class CategoryDTO {
+    String Category;
 }
