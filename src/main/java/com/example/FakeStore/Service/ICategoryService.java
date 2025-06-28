@@ -1,8 +1,10 @@
 package com.example.FakeStore.Service;
 
+import com.example.FakeStore.DTO.ProductDTO;
+
 import java.util.List;
 
 public interface ICategoryService {
 
-    public String getAllCategory(List<String> productByCategory);
+    public List<ProductDTO> getAllCategory();
 }
