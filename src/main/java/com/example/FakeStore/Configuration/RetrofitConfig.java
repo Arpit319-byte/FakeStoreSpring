@@ -12,7 +12,7 @@ public class RetrofitConfig {
     @Bean
     public Retrofit retrofit(){
         return new Retrofit.Builder()
-                .baseUrl("https://fakestoreapi.in/api")
+                .baseUrl("https://fakestoreapi.in/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

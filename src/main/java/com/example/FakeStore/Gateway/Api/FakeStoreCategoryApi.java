@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface FakeStoreCategoryApi {
 
-    @GET
-    Call<List<FakeStoreCategoryResponseDTO>> getAllCategories();
+    @GET("products/category")
+    Call<FakeStoreCategoryResponseDTO> getAllCategories();
 }
