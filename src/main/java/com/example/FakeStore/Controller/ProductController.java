@@ -1,4 +1,26 @@
 package com.example.FakeStore.Controller;
 
+import com.example.FakeStore.DTO.ProductDTO;
+import com.example.FakeStore.Service.IProductService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.util.List;
+
+@RestController
+@RequestMapping("api/v1/Product")
 public class ProductController {
+
+    private final IProductService iProductService;
+
+    public ProductController(IProductService _iProductService){
+      this.iProductService=_iProductService;
+    }
+
+    @GetMapping
+    public List<ProductDTO> getAllProduct() throws IOException {
+        return iProductService.getAllProduct();
+    }
 }

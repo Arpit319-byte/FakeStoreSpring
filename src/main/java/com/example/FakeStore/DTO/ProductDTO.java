@@ -10,6 +10,6 @@ import lombok.*;
 public class ProductDTO {
 
     String title;
-    String price;
+    Integer price;
     String description;
 }

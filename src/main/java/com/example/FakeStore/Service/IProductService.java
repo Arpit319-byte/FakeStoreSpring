@@ -1,9 +1,11 @@
 package com.example.FakeStore.Service;
 
 import com.example.FakeStore.DTO.ProductDTO;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface IProductService {
 
-    public List<ProductDTO>  getAllProduct();
+    public List<ProductDTO>  getAllProduct() throws IOException;
 }
