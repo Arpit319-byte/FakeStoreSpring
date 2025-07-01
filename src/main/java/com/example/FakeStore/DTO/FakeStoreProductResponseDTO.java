@@ -1,5 +1,6 @@
 package com.example.FakeStore.DTO;
 
+import com.example.FakeStore.model.Product;
 import lombok.*;
 
 import java.util.List;
@@ -10,8 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class FakeStoreProductResponseDTO {
-
     String status;
     String message;
-    List<String> products;
+    List<Product> products;
 }
