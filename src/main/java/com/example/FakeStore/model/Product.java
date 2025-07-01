@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class Product {
 
+    Integer id;
     String title;
     Integer price;
     String description;
