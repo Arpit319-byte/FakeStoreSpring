@@ -8,4 +8,6 @@ import java.util.List;
 public interface IProductService {
 
     public List<ProductDTO>  getAllProduct() throws IOException;
+
+    public List<ProductDTO> getProductById() throws IOException;
 }

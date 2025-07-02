@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("api/v1/Product")
 public class ProductController {
 
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ProductController.class);
     private final IProductService iProductService;
 
     public ProductController(IProductService _iProductService){
@@ -21,6 +22,15 @@ public class ProductController {
 
     @GetMapping
     public List<ProductDTO> getAllProduct() throws IOException {
+        // This method fetches all products from the service layer
+        logger.info("Fetching all products from the FakeStoreService Layer");
         return iProductService.getAllProduct();
+    }
+
+    @GetMapping("/{id}")
+    public List<ProductDTO> getProductById() throws IOException {
+        // This method can be implemented to fetch a product by its ID
+        logger.info("Fetching product by ID from the FakeStoreService Layer");
+        return iProductService.getProductById();
     }
 }

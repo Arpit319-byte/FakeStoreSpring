@@ -7,6 +7,9 @@ import retrofit2.http.GET;
 import java.util.List;
 
 public interface FakeStoreProductApi {
-    @GET("https://fakestoreapi.in/api/products")
+    @GET("products")
     Call<FakeStoreProductResponseDTO> getAllProducts();
+
+    @GET("products/2")
+    Call<FakeStoreProductResponseDTO> getProductById();
 }
