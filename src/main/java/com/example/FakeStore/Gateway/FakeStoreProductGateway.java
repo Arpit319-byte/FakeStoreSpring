@@ -58,4 +58,24 @@ public class FakeStoreProductGateway implements IProductGateway {
                         .build())
                 .toList();
     }
+
+    @Override
+    public List<ProductDTO> getProductByCategory() throws IOException {
+
+        logger.info("Fetching the response for products by category from FakeStoreProductApi");
+        FakeStoreProductResponseDTO response = fakeStoreProductApi.getProductByCategory().execute().body();
+
+        if (response == null) {
+            logger.error("Response returned from FakeStoreProductApi is Null for the specified category");
+            throw new IOException("Response is null");
+        }
+
+        return response.getProducts().stream()
+                .map(product -> ProductDTO.builder()
+                        .title(product.getTitle())
+                        .price(product.getPrice())
+                        .description(product.getDescription())
+                        .build())
+                .toList();
+    }
 }

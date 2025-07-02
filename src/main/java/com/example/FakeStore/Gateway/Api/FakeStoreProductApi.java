@@ -12,4 +12,7 @@ public interface FakeStoreProductApi {
 
     @GET("products/2")
     Call<FakeStoreProductResponseDTO> getProductById();
+
+    @GET("products/category?type=mobile")
+    Call<FakeStoreProductResponseDTO> getProductByCategory();
 }

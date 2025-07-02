@@ -30,4 +30,11 @@ public class FakeStoreProductService implements IProductService {
         logger.info("Fetching product by ID from the FakeStoreProductService Layer");
         return iProductGateway.getProductById();
     }
+
+    @Override
+    public List<ProductDTO> getProductByCategory() throws IOException {
+        // This method can be implemented to fetch products by category
+        logger.info("Fetching products by category from the FakeStoreProductService Layer");
+        return iProductGateway.getProductByCategory();
+    }
 }

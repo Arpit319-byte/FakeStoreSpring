@@ -33,4 +33,11 @@ public class ProductController {
         logger.info("Fetching product by ID from the FakeStoreService Layer");
         return iProductService.getProductById();
     }
+
+    @GetMapping("/category/type")
+    public List<ProductDTO> getProductByCategory() throws IOException {
+        // This method can be implemented to fetch products by category
+        logger.info("Fetching products by category from the FakeStoreService Layer");
+        return iProductService.getProductByCategory();
+    }
 }
