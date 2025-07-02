@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class FakeStoreProductResponseDTO {
-    Integer id;
     String status;
     String message;
     List<Product> products;
