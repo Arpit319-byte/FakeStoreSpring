@@ -1,6 +1,7 @@
 package com.example.FakeStore.DTO;
 // This class is a placeholder for User Data Transfer Object (DTO).
 
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 @Setter
@@ -10,11 +11,25 @@ import lombok.*;
 @Builder
 public class UserDTO {
 
-    private String id;
-    private String email;
-    private String username;
+
+    @SerializedName("password")
     private String password;
-//    private String name;
-//    private String address;
-//    private String phoneNumber;
+
+    @SerializedName("address")
+    private Address address;
+
+    @SerializedName("phone")
+    private String phone;
+
+    @SerializedName("name")
+    private Name name;
+
+    @SerializedName("id")
+    private Integer id;
+
+    @SerializedName("email")
+    private String email;
+
+    @SerializedName("username")
+    private String username;
 }

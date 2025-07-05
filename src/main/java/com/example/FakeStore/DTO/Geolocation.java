@@ -3,19 +3,17 @@ package com.example.FakeStore.DTO;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FakeStoreSingleUserResponseDTO {
+public class Geolocation{
 
-    @SerializedName("status")
-    String status;
+    @SerializedName("lat")
+    private Object lat;
 
-    @SerializedName("message")
-    String message;
-
-
-    UserDTO user;
+    @SerializedName("long")
+    private Object lon;
 }

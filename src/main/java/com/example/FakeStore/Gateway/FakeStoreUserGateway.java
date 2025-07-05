@@ -26,17 +26,28 @@ public class FakeStoreUserGateway implements IUserGateway{
         FakeStoreUserResponseDTO response = fakeStoreUserApi.getAllUsers().execute().body();
 
         // Check if the response is null or if it contains a null user list
-        if (response == null || response.getUser() == null) {
+        if (response == null ) {
             logger.error("Failed to fetch users from the API or received null response");
             return List.of(); // Return an empty list if the response is null
         }
 
-        return response.getUser().stream().map(
+        // Check if the user list is null or empty
+        if (response.getUsers() == null) {
+            logger.info(response.getStatus());
+            logger.info(response.getMessage());
+            logger.error("No users found in the response");
+            return List.of(); // Return an empty list if no users are found
+        }
+
+        return response.getUsers().stream().map(
             user -> UserDTO.builder()
                     .id(user.getId())
                     .email(user.getEmail())
                     .username(user.getUsername())
                     .password(user.getPassword())
+                    .name(user.getName())
+                    .address(user.getAddress())
+                    .phone(user.getPhone())
                     .build())
                 .toList();
 

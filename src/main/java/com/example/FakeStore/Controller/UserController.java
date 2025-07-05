@@ -5,6 +5,7 @@ import com.example.FakeStore.Service.IUserService;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class UserController {
      }
 
      @GetMapping("/{id}")
-        public ResponseEntity<UserDTO> getUserById(Long id) throws IOException {
+        public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) throws IOException {
                 // This method can be implemented to fetch a user by their ID
                 logger.info("Fetching user by ID from the UserController Layer");
                 UserDTO user = userService.getUserById(id);
