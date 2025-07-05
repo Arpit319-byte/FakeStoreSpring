@@ -22,6 +22,13 @@ public class FakeStoreUserService implements IUserService {
     public List<UserDTO> getAllUsers() throws IOException {
         // This method fetches all users from the user gateway layer
         logger.info("Fetching all users from the FakeStoreUserService Layer");
-        return  userGateway.getAllUsers();
+        return userGateway.getAllUsers();
+    }
+
+    @Override
+    public UserDTO getUserById(Long id) throws IOException {
+        // This method fetches a user by their ID
+        logger.info("Fetching user by ID from the FakeStoreUserService Layer");
+        return userGateway.getUserById(id);
     }
 }

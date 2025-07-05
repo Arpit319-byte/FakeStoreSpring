@@ -1,5 +1,6 @@
 package com.example.FakeStore.Gateway;
 
+import com.example.FakeStore.DTO.FakeStoreSingleUserResponseDTO;
 import com.example.FakeStore.DTO.FakeStoreUserResponseDTO;
 import com.example.FakeStore.DTO.UserDTO;
 import com.example.FakeStore.Gateway.Api.FakeStoreUserApi;
@@ -39,5 +40,18 @@ public class FakeStoreUserGateway implements IUserGateway{
                     .build())
                 .toList();
 
+    }
+
+    @Override
+    public UserDTO getUserById(Long id) throws IOException {
+        logger.info("Fetching user by ID from the GatewayLayer");
+        FakeStoreSingleUserResponseDTO response = fakeStoreUserApi.getUserById(id).execute().body();
+
+        // Check if the response is null or if it contains a null user
+        if (response == null || response.getUser() == null) {
+            logger.error("Failed to fetch user with ID {} from the API or received null response", id);
+            return null; // Return null if the response is null
+        }
+        return response.getUser();
     }
 }

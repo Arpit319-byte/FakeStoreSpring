@@ -8,5 +8,11 @@ import java.util.List;
 
 
 public interface IUserService {
+
+     // Fetches all users from the user gateway layer
      List<UserDTO> getAllUsers() throws IOException;
+
+        // Fetches a user by their ID
+        UserDTO getUserById(Long id) throws IOException;
+
 }

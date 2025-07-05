@@ -29,4 +29,13 @@ public class UserController {
             List<UserDTO> users = userService.getAllUsers();
             return ResponseEntity.ok(users);
      }
+
+     @GetMapping("/{id}")
+        public ResponseEntity<UserDTO> getUserById(Long id) throws IOException {
+                // This method can be implemented to fetch a user by their ID
+                logger.info("Fetching user by ID from the UserController Layer");
+                UserDTO user = userService.getUserById(id);
+                return ResponseEntity.ok(user);
+        }
+
 }
