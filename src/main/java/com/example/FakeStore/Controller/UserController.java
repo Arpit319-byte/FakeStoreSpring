@@ -4,10 +4,7 @@ import com.example.FakeStore.DTO.UserDTO;
 import com.example.FakeStore.Service.IUserService;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,5 +35,20 @@ public class UserController {
                 UserDTO user = userService.getUserById(id);
                 return ResponseEntity.ok(user);
         }
+
+     @PostMapping
+     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+
+         // This method can be implemented to create a new user
+         logger.info("Creating a new user in the UserController Layer");
+
+         UserDTO createdUser = userService.createUser(userDTO);
+            if (createdUser == null) {
+                logger.error("Failed to create user: {}", userDTO);
+                 // If the user creation fails, return a 400 Bad Request response
+                return ResponseEntity.status(400).build(); // Bad Request
+            }
+         return ResponseEntity.status(201).body(createdUser); // Created
+     }
 
 }

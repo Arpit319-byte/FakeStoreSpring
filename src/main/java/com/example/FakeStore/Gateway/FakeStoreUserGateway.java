@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-public class FakeStoreUserGateway implements IUserGateway{
+public class FakeStoreUserGateway implements IUserGateway {
 
     private final Logger logger = org.slf4j.LoggerFactory.getLogger(FakeStoreUserGateway.class);
     private final FakeStoreUserApi fakeStoreUserApi;
@@ -26,7 +26,7 @@ public class FakeStoreUserGateway implements IUserGateway{
         FakeStoreUserResponseDTO response = fakeStoreUserApi.getAllUsers().execute().body();
 
         // Check if the response is null or if it contains a null user list
-        if (response == null ) {
+        if (response == null) {
             logger.error("Failed to fetch users from the API or received null response");
             return List.of(); // Return an empty list if the response is null
         }
@@ -40,15 +40,15 @@ public class FakeStoreUserGateway implements IUserGateway{
         }
 
         return response.getUsers().stream().map(
-            user -> UserDTO.builder()
-                    .id(user.getId())
-                    .email(user.getEmail())
-                    .username(user.getUsername())
-                    .password(user.getPassword())
-                    .name(user.getName())
-                    .address(user.getAddress())
-                    .phone(user.getPhone())
-                    .build())
+                        user -> UserDTO.builder()
+                                .id(user.getId())
+                                .email(user.getEmail())
+                                .username(user.getUsername())
+                                .password(user.getPassword())
+                                .name(user.getName())
+                                .address(user.getAddress())
+                                .phone(user.getPhone())
+                                .build())
                 .toList();
 
     }

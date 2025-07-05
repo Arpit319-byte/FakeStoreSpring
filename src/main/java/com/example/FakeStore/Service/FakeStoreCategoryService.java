@@ -18,9 +18,10 @@ public class FakeStoreCategoryService implements ICategoryService {
     private static final Logger logger = LoggerFactory.getLogger(FakeStoreCategoryService.class);
     private final ICategoryGateway iCategoryGateway;
 
-    public FakeStoreCategoryService(ICategoryGateway _iCategoryGateway){
-        this.iCategoryGateway=_iCategoryGateway;
+    public FakeStoreCategoryService(ICategoryGateway _iCategoryGateway) {
+        this.iCategoryGateway = _iCategoryGateway;
     }
+
     @Override
     public List<CategoryDTO> getAllCategory() throws IOException {
         logger.info("Fetching the Category list from the GatewayLayer");

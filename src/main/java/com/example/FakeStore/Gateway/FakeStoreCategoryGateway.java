@@ -15,19 +15,20 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class FakeStoreCategoryGateway implements ICategoryGateway{
+public class FakeStoreCategoryGateway implements ICategoryGateway {
 
     private static final Logger logger = LoggerFactory.getLogger(FakeStoreCategoryGateway.class);
 
     private final FakeStoreCategoryApi fakeStoreCategoryApi;
 
-    public FakeStoreCategoryGateway(FakeStoreCategoryApi _fakeStoreCategoryApi){
-        fakeStoreCategoryApi=_fakeStoreCategoryApi;
+    public FakeStoreCategoryGateway(FakeStoreCategoryApi _fakeStoreCategoryApi) {
+        fakeStoreCategoryApi = _fakeStoreCategoryApi;
     }
+
     @Override
     public List<CategoryDTO> getAllCategories() throws IOException {
         logger.info("Fetching the response from FakeStoreCategoryApi");
-        FakeStoreCategoryResponseDTO response=fakeStoreCategoryApi.getAllCategories().execute().body();
+        FakeStoreCategoryResponseDTO response = fakeStoreCategoryApi.getAllCategories().execute().body();
 
         if (response == null) {
             logger.info("Response returned from FakeStoreCategoryApi is Null");
@@ -36,7 +37,7 @@ public class FakeStoreCategoryGateway implements ICategoryGateway{
 
         logger.info("Returning the Response in form of list of CategoryDTO");
         return response.getCategories().stream()
-                .map(category->CategoryDTO.builder()
+                .map(category -> CategoryDTO.builder()
                         .name(category)
                         .build())
                 .toList();

@@ -5,7 +5,7 @@ import com.example.FakeStore.DTO.ProductDTO;
 import java.io.IOException;
 import java.util.List;
 
-public interface IProductGateway  {
+public interface IProductGateway {
 
     public List<ProductDTO> getAllProduct() throws IOException;
 
