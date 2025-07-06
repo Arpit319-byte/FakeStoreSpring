@@ -78,4 +78,18 @@ public class FakeStoreUserGateway implements IUserGateway {
         }
         return response.getUser();
     }
+
+    @Override
+    public boolean deleteUserById(Long id) throws IOException {
+        logger.info("Deleting user by ID from the GatewayLayer");
+        FakeStoreUserResponseDTO response= fakeStoreUserApi.deleteUserById(id).execute().body();
+
+        // Check if the response is null or if it contains a null user
+        if (response == null ){
+            logger.error("Failed to delete user with ID {} or received null response", id);
+            return false; // Return false if the response is null
+        }
+
+        return true; // Return true if the deletion was successful
+    }
 }

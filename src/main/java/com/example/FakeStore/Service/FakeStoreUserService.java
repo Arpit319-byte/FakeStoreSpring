@@ -43,4 +43,17 @@ public class FakeStoreUserService implements IUserService {
         }
         return createdUser; // Return the created user
     }
+
+    @Override
+    public boolean deleteUserById(Long id) throws IOException {
+        // This method deletes a user by their ID
+        logger.info("Deleting user by ID from the FakeStoreUserService Layer");
+        boolean isDeleted = userGateway.deleteUserById(id);
+        if (isDeleted) {
+            logger.info("User with ID {} deleted successfully", id);
+        } else {
+            logger.error("Failed to delete user with ID {}", id);
+        }
+        return isDeleted; // Return true if deletion was successful, false otherwise
+    }
 }

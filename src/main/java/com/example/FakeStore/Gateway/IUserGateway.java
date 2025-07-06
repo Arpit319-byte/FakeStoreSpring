@@ -15,4 +15,7 @@ public interface IUserGateway {
 
     // Creates a new user
     UserDTO createUser(UserDTO userDTO) throws IOException;
+
+    // Deletes a user by their ID
+    boolean deleteUserById(Long id) throws IOException;
 }

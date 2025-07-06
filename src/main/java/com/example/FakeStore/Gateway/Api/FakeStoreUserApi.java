@@ -4,10 +4,7 @@ import com.example.FakeStore.DTO.FakeStoreSingleUserResponseDTO;
 import com.example.FakeStore.DTO.FakeStoreUserResponseDTO;
 import com.example.FakeStore.DTO.UserDTO;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
+import retrofit2.http.*;
 
 public interface FakeStoreUserApi {
 
@@ -19,4 +16,7 @@ public interface FakeStoreUserApi {
 
     @POST("users")
     Call<FakeStoreSingleUserResponseDTO> createUser(@Body UserDTO userDTO);
+
+    @DELETE("users/{id}")
+    Call<FakeStoreUserResponseDTO> deleteUserById(@Path("id") Long id);
 }

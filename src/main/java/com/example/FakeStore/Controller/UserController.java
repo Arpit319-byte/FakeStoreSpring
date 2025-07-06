@@ -51,4 +51,16 @@ public class UserController {
          return ResponseEntity.status(201).body(createdUser); // Created
      }
 
+     @DeleteMapping("{id}")
+     public ResponseEntity<String> deleteUserById(@PathVariable Long id) throws IOException {
+         // This method can be implemented to delete a user by their ID
+         logger.info("Deleting user by ID from the UserController Layer");
+         boolean isDeleted = userService.deleteUserById(id);
+         if (isDeleted) {
+             return ResponseEntity.ok("User deleted successfully");
+         } else {
+             return ResponseEntity.status(404).body("User not found");
+         }
+     }
+
 }
