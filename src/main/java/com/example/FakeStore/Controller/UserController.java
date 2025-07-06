@@ -37,7 +37,7 @@ public class UserController {
         }
 
      @PostMapping
-     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) throws IOException {
 
          // This method can be implemented to create a new user
          logger.info("Creating a new user in the UserController Layer");

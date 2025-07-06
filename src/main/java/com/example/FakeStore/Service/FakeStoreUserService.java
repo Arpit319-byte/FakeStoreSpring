@@ -31,4 +31,16 @@ public class FakeStoreUserService implements IUserService {
         logger.info("Fetching user by ID from the FakeStoreUserService Layer");
         return userGateway.getUserById(id);
     }
+
+    @Override
+    public UserDTO createUser(UserDTO userDTO) throws IOException {
+        // This method creates a new user
+        logger.info("Creating a new user in the FakeStoreUserService Layer");
+        UserDTO createdUser = userGateway.createUser(userDTO);
+        if (createdUser == null) {
+            logger.error("Failed to create user: {}", userDTO);
+            return null; // If the user creation fails, return null
+        }
+        return createdUser; // Return the created user
+    }
 }

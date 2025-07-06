@@ -15,4 +15,6 @@ public interface IUserService {
     // Fetches a user by their ID
     UserDTO getUserById(Long id) throws IOException;
 
+    UserDTO createUser(UserDTO userDTO) throws IOException;
+
 }

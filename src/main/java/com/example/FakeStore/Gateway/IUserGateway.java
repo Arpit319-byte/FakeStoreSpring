@@ -12,4 +12,7 @@ public interface IUserGateway {
 
     // Fetches a user by their ID
     UserDTO getUserById(Long id) throws IOException;
+
+    // Creates a new user
+    UserDTO createUser(UserDTO userDTO) throws IOException;
 }

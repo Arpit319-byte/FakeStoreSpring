@@ -65,4 +65,17 @@ public class FakeStoreUserGateway implements IUserGateway {
         }
         return response.getUser();
     }
+
+    @Override
+    public UserDTO createUser(UserDTO userDTO) throws IOException {
+        logger.info("Creating a new user in the GatewayLayer");
+        FakeStoreSingleUserResponseDTO response = fakeStoreUserApi.createUser(userDTO).execute().body();
+
+        // Check if the response is null or if it contains a null user
+        if (response == null || response.getUser() == null) {
+            logger.error("Failed to create user or received null response");
+            return null; // Return null if the response is null
+        }
+        return response.getUser();
+    }
 }
