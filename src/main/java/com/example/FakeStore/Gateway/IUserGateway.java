@@ -18,4 +18,7 @@ public interface IUserGateway {
 
     // Deletes a user by their ID
     boolean deleteUserById(Long id) throws IOException;
+
+    // Updates a user by their ID
+    UserDTO updateUserById(Long id, UserDTO userDTO) throws IOException;
 }

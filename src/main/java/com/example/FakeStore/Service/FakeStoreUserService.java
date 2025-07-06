@@ -56,4 +56,16 @@ public class FakeStoreUserService implements IUserService {
         }
         return isDeleted; // Return true if deletion was successful, false otherwise
     }
+
+    @Override
+    public UserDTO updateUserById(Long id, UserDTO userDTO) throws IOException {
+        // This method updates a user by their ID
+        logger.info("Updating user with ID {} in the FakeStoreUserService Layer", id);
+        UserDTO updatedUser = userGateway.updateUserById(id, userDTO);
+        if (updatedUser == null) {
+            logger.error("Failed to update user with ID {}: {}", id, userDTO);
+            return null; // If the update fails, return null
+        }
+        return updatedUser; // Return the updated user
+    }
 }

@@ -19,4 +19,7 @@ public interface FakeStoreUserApi {
 
     @DELETE("users/{id}")
     Call<FakeStoreUserResponseDTO> deleteUserById(@Path("id") Long id);
+
+    @PUT("users/{id}")
+    Call<FakeStoreSingleUserResponseDTO> updateUserById(@Path("id") Long id, @Body UserDTO userDTO);
 }

@@ -92,4 +92,18 @@ public class FakeStoreUserGateway implements IUserGateway {
 
         return true; // Return true if the deletion was successful
     }
+
+    @Override
+    public UserDTO updateUserById(Long id, UserDTO userDTO) throws IOException {
+        logger.info("Updating user with ID {} in the GatewayLayer", id);
+        FakeStoreSingleUserResponseDTO response = fakeStoreUserApi.updateUserById(id, userDTO).execute().body();
+
+        // Check if the response is null or if it contains a null user
+        if (response == null || response.getUser() == null) {
+            logger.error("Failed to update user with ID {} or received null response", id);
+            return null; // Return null if the response is null
+        }
+
+        return response.getUser(); // Return the updated user
+    }
 }

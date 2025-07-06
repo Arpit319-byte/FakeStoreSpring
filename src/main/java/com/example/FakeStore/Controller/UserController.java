@@ -63,4 +63,16 @@ public class UserController {
          }
      }
 
+     @PutMapping("/{id}")
+     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) throws IOException {
+         // This method can be implemented to update a user by their ID
+         logger.info("Updating user with ID {} in the UserController Layer", id);
+         UserDTO updatedUser = userService.updateUserById(id, userDTO);
+         if (updatedUser == null) {
+             logger.error("Failed to update user with ID: {}", id);
+             return ResponseEntity.status(404).build(); // Not Found
+         }
+         return ResponseEntity.ok(updatedUser); // OK
+     }
+
 }
