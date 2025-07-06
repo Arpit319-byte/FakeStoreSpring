@@ -106,4 +106,28 @@ public class FakeStoreUserGateway implements IUserGateway {
 
         return response.getUser(); // Return the updated user
     }
+
+    @Override
+    public List<UserDTO> getLimitedUsers(int limit) throws IOException {
+        logger.info("Fetching limited users from the GatewayLayer with limit: {}", limit);
+        FakeStoreUserResponseDTO response = fakeStoreUserApi.getLimitedUsers(limit).execute().body();
+
+        // Check if the response is null or if it contains a null user list
+        if (response == null || response.getUsers() == null) {
+            logger.error("Failed to fetch limited users or received null response");
+            return List.of(); // Return an empty list if the response is null
+        }
+
+        return response.getUsers().stream().map(
+                        user -> UserDTO.builder()
+                                .id(user.getId())
+                                .email(user.getEmail())
+                                .username(user.getUsername())
+                                .password(user.getPassword())
+                                .name(user.getName())
+                                .address(user.getAddress())
+                                .phone(user.getPhone())
+                                .build())
+                .toList();
+    }
 }

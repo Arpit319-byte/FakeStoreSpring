@@ -75,4 +75,12 @@ public class UserController {
          return ResponseEntity.ok(updatedUser); // OK
      }
 
+     @GetMapping("limited/{size}")
+     public ResponseEntity<List<UserDTO>> getLimitedUsers(@RequestParam(defaultValue = "10") int size) throws IOException {
+         // This method can be implemented to fetch a limited number of users
+         logger.info("Fetching limited users from the UserController Layer");
+         List<UserDTO> users = userService.getAllUsers();
+         return ResponseEntity.ok(users);
+     }
+
 }

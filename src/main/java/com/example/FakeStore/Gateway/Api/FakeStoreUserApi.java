@@ -22,4 +22,7 @@ public interface FakeStoreUserApi {
 
     @PUT("users/{id}")
     Call<FakeStoreSingleUserResponseDTO> updateUserById(@Path("id") Long id, @Body UserDTO userDTO);
+
+    @GET("users?limit={limit}")
+    Call<FakeStoreUserResponseDTO> getLimitedUsers(@Query("limit") int limit);
 }

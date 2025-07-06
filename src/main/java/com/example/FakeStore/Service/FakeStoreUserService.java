@@ -68,4 +68,15 @@ public class FakeStoreUserService implements IUserService {
         }
         return updatedUser; // Return the updated user
     }
+
+    @Override
+    public List<UserDTO> getLimitedUsers(int limit) throws IOException {
+        // This method fetches a limited number of users
+        logger.info("Fetching limited users from the FakeStoreUserService Layer with limit: {}", limit);
+        List<UserDTO> limitedUsers = userGateway.getLimitedUsers(limit);
+        if (limitedUsers == null || limitedUsers.isEmpty()) {
+            logger.warn("No users found with the specified limit: {}", limit);
+        }
+        return limitedUsers; // Return the list of limited users
+    }
 }

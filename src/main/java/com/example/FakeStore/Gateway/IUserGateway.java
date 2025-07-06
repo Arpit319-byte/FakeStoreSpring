@@ -21,4 +21,7 @@ public interface IUserGateway {
 
     // Updates a user by their ID
     UserDTO updateUserById(Long id, UserDTO userDTO) throws IOException;
+
+    // Fetches limited users
+    List<UserDTO> getLimitedUsers(int limit) throws IOException;
 }
