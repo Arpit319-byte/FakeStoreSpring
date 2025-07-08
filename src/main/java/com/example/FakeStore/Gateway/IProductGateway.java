@@ -13,7 +13,7 @@ public interface IProductGateway {
     List<ProductDTO> getAllProduct() throws IOException;
 
     // Fetches a product by its ID
-     List<ProductDTO> getProductById() throws IOException;
+     ProductDTO getProductById(long id) throws IOException;
 
     // Fetches products by category
     List<ProductDTO> getProductByCategory() throws IOException;

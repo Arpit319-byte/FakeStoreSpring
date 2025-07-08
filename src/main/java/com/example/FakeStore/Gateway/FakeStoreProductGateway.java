@@ -42,23 +42,18 @@ public class FakeStoreProductGateway implements IProductGateway {
     }
 
     @Override
-    public List<ProductDTO> getProductById() throws IOException {
+    public ProductDTO getProductById(long id) throws IOException {
 
         logger.info("Fetching the response for a specific product by ID from FakeStoreProductApi");
-        FakeStoreProductResponseDTO response = fakeStoreProductApi.getProductById().execute().body();
+        FakeStoreSingleProductResponseDTO response = fakeStoreProductApi.getProductById(id).execute().body();
 
         if (response == null) {
             logger.error("Response returned from FakeStoreProductApi is Null for the specified product ID");
             throw new IOException("Response is null");
         }
 
-        return response.getProducts().stream()
-                .map(product -> ProductDTO.builder()
-                        .title(product.getTitle())
-                        .price(product.getPrice())
-                        .description(product.getDescription())
-                        .build())
-                .toList();
+        return response.getProduct();
+
     }
 
     @Override

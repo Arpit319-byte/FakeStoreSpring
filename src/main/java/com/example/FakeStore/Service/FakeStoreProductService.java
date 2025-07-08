@@ -30,10 +30,10 @@ public class FakeStoreProductService implements IProductService {
     }
 
     @Override
-    public List<ProductDTO> getProductById() throws IOException {
+    public ProductDTO getProductById(long id) throws IOException {
         // This method can be implemented to fetch a product by its ID
         logger.info("Fetching product by ID from the FakeStoreProductService Layer");
-        return iProductGateway.getProductById();
+        return iRestTemplateGateway.getProductById(id);
     }
 
     @Override
