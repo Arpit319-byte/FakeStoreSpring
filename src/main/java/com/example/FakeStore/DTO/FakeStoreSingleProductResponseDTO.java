@@ -1,16 +1,16 @@
 package com.example.FakeStore.DTO;
 
-import lombok.*;
 
-import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FakeStoreProductResponseDTO {
+public class FakeStoreSingleProductResponseDTO {
+
     String status;
     String message;
-    List<ProductDTO> products;
+    ProductDTO product;
 }

@@ -12,4 +12,6 @@ public interface IProductGateway {
     public List<ProductDTO> getProductById() throws IOException;
 
     public List<ProductDTO> getProductByCategory() throws IOException;
+
+    public ProductDTO createProduct(ProductDTO productDTO) throws IOException;
 }

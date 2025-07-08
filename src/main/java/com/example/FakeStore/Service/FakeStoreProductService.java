@@ -37,4 +37,16 @@ public class FakeStoreProductService implements IProductService {
         logger.info("Fetching products by category from the FakeStoreProductService Layer");
         return iProductGateway.getProductByCategory();
     }
+
+    @Override
+    public ProductDTO createProduct(ProductDTO productDTO) throws IOException {
+        // This method can be implemented to create a new product
+        logger.info("Creating a new product in the FakeStoreProductService Layer");
+        ProductDTO createdProduct = iProductGateway.createProduct(productDTO);
+        if (createdProduct == null) {
+            logger.error("Failed to create product: {}", productDTO);
+            return null; // If the product creation fails, return null
+        }
+        return createdProduct; // Return the created product
+    }
 }

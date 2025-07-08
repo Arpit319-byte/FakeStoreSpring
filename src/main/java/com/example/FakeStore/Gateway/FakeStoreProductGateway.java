@@ -1,6 +1,8 @@
 package com.example.FakeStore.Gateway;
 
 import com.example.FakeStore.DTO.FakeStoreProductResponseDTO;
+import com.example.FakeStore.DTO.FakeStoreSingleProductResponseDTO;
+import com.example.FakeStore.DTO.FakeStoreUserResponseDTO;
 import com.example.FakeStore.DTO.ProductDTO;
 import com.example.FakeStore.Gateway.Api.FakeStoreProductApi;
 import org.slf4j.Logger;
@@ -77,5 +79,18 @@ public class FakeStoreProductGateway implements IProductGateway {
                         .description(product.getDescription())
                         .build())
                 .toList();
+    }
+
+    @Override
+    public ProductDTO createProduct(ProductDTO productDTO) throws IOException {
+        logger.info("Creating a new product in the FakeStoreProductApi");
+        FakeStoreSingleProductResponseDTO response = fakeStoreProductApi.createProduct(productDTO).execute().body();
+
+        if (response == null || response.getProduct() == null ) {
+            logger.error("Failed to create product or received null response from FakeStoreProductApi");
+            throw new IOException("Failed to create product or received null response");
+        }
+
+        return response.getProduct() ;  // Assuming the API returns a list with one created product
     }
 }
