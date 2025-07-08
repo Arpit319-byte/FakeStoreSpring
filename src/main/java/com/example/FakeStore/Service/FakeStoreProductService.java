@@ -26,7 +26,7 @@ public class FakeStoreProductService implements IProductService {
     public List<ProductDTO> getAllProduct() throws IOException {
         // This method fetches all products from the gateway layer
         logger.info("Fetching all products from the FakeStoreProductService Layer");
-        return iProductGateway.getAllProduct();
+        return iRestTemplateGateway.getAllProduct();
     }
 
     @Override

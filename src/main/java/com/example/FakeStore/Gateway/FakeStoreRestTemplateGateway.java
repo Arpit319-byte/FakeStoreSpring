@@ -1,5 +1,6 @@
 package com.example.FakeStore.Gateway;
 
+import com.example.FakeStore.DTO.FakeStoreProductResponseDTO;
 import com.example.FakeStore.DTO.ProductDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +22,27 @@ public class FakeStoreRestTemplateGateway implements IProductGateway{
 
     @Override
     public List<ProductDTO> getAllProduct() throws IOException {
-        return List.of();
+        // This method should implement the logic to fetch all products using RestTemplate.
+        String url = "https://fakestoreapi.in/api/products";
+        try {
+            FakeStoreProductResponseDTO products = restTemplate.getForObject(url, FakeStoreProductResponseDTO.class);
+            if (products != null) {
+                return products.getProducts().stream()
+                        .map(product -> ProductDTO.builder()
+                                .id(product.getId())
+                                .title(product.getTitle())
+                                .price(product.getPrice())
+                                .description(product.getDescription())
+                                .build())
+                        .toList();
+            } else {
+                throw new IOException("No products found");
+            }
+        } catch (Exception e) {
+            // Log the exception or handle it as needed
+            System.err.println("Error fetching products: " + e.getMessage());
+            throw new IOException("Error fetching products", e);
+        }
     }
 
     @Override
