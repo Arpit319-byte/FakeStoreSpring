@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
-@Component
+@Component("FakeStoreProductGateway")
 public class FakeStoreProductGateway implements IProductGateway {
 
     private final Logger logger = org.slf4j.LoggerFactory.getLogger(FakeStoreProductGateway.class);
@@ -92,5 +92,10 @@ public class FakeStoreProductGateway implements IProductGateway {
         }
 
         return response.getProduct() ;  // Assuming the API returns a list with one created product
+    }
+
+    @Override
+    public boolean deleteProductById(Long id) throws IOException {
+        return false;
     }
 }

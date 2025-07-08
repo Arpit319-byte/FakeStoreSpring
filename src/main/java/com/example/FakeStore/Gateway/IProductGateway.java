@@ -7,11 +7,21 @@ import java.util.List;
 
 public interface IProductGateway {
 
-    public List<ProductDTO> getAllProduct() throws IOException;
+    // This interface defines the methods for interacting with the product data source.
 
-    public List<ProductDTO> getProductById() throws IOException;
+    // Fetches all products
+    List<ProductDTO> getAllProduct() throws IOException;
 
-    public List<ProductDTO> getProductByCategory() throws IOException;
+    // Fetches a product by its ID
+     List<ProductDTO> getProductById() throws IOException;
 
-    public ProductDTO createProduct(ProductDTO productDTO) throws IOException;
+    // Fetches products by category
+    List<ProductDTO> getProductByCategory() throws IOException;
+
+    // Creates a new product
+     ProductDTO createProduct(ProductDTO productDTO) throws IOException;
+
+    // Deletes a product by its ID
+     boolean deleteProductById(Long id) throws IOException;
+
 }

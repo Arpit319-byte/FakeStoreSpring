@@ -14,4 +14,6 @@ public interface IProductService {
     public List<ProductDTO> getProductByCategory() throws IOException;
 
     public ProductDTO createProduct(ProductDTO productDTO) throws IOException;
+
+    public boolean deleteProductById(Long id) throws IOException;
 }

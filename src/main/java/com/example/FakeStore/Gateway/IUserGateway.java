@@ -24,4 +24,5 @@ public interface IUserGateway {
 
     // Fetches limited users
     List<UserDTO> getLimitedUsers(int limit) throws IOException;
+
 }

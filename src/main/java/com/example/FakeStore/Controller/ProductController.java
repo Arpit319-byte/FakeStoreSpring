@@ -52,4 +52,17 @@ public class ProductController {
         }
         return ResponseEntity.status(201).body(createdProduct); // Created
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteProductById(@PathVariable Long id) throws IOException {
+        // This method can be implemented to delete a product by its ID
+        logger.info("Deleting product by ID from the FakeStoreService Layer");
+        boolean isDeleted = iProductService.deleteProductById(id);
+        if (isDeleted) {
+            return ResponseEntity.ok("Product deleted successfully");
+        } else {
+            logger.error("Failed to delete product with ID {}", id);
+            return ResponseEntity.status(404).body("Product not found"); // Not Found
+        }
+    }
 }
