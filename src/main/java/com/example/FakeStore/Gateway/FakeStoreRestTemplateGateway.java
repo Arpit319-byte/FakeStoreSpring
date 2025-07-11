@@ -75,7 +75,22 @@ public class FakeStoreRestTemplateGateway implements IProductGateway{
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) throws IOException {
-        return null;
+
+        String url = "https://fakestoreapi.in/api/products";
+
+        try{
+            FakeStoreSingleProductResponseDTO response = restTemplate.postForObject(url, productDTO, FakeStoreSingleProductResponseDTO.class);
+            if (response != null && response.getProduct() != null) {
+                return response.getProduct();
+            } else {
+                throw new IOException("Failed to create product");
+            }
+
+        } catch (RuntimeException e) {
+            // Log the exception or handle it as needed
+            System.err.println("Error creating product: " + e.getMessage());
+            throw new IOException("Error creating product", e);
+        }
     }
 
     @Override
