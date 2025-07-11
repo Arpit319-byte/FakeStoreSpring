@@ -35,21 +35,47 @@ public class ProductService implements IProductService {
 
     @Override
     public ProductDTO getProductById(long id) throws IOException {
-        return null;
+        // This method can be implemented to fetch a product by its ID
+        return productRepository.findById(id)
+                .map(product -> ProductDTO.builder()
+                        .id(product.getId())
+                        .title(product.getTitle())
+                        .price(product.getPrice())
+                        .description(product.getDescription())
+                        .build())
+                .orElseThrow(() -> new IOException("Product not found for ID: " + id));
     }
 
     @Override
     public List<ProductDTO> getProductByCategory() throws IOException {
-        return List.of();
-    }
-
-    @Override
-    public ProductDTO createProduct(ProductDTO productDTO) throws IOException {
         return null;
     }
 
     @Override
+    public ProductDTO createProduct(ProductDTO productDTO) throws IOException {
+
+        Product product = Product.builder()
+                .title(productDTO.getTitle())
+                .price(productDTO.getPrice())
+                .description(productDTO.getDescription())
+                .build();
+        Product savedProduct = productRepository.save(product);
+        return ProductDTO.builder()
+                .id(savedProduct.getId())
+                .title(savedProduct.getTitle())
+                .price(savedProduct.getPrice())
+                .description(savedProduct.getDescription())
+                .build();
+    }
+
+    @Override
     public boolean deleteProductById(Long id) throws IOException {
-        return false;
+        // This method can be implemented to delete a product by its ID
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return true; // Return true if deletion was successful
+        } else {
+            throw new IOException("Product not found for ID: " + id);
+        }
     }
 }
