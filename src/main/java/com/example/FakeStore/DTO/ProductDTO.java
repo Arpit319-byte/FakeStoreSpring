@@ -9,8 +9,8 @@ import lombok.*;
 @Builder
 public class ProductDTO {
 
-    Integer id;
+    Long id;
     String title;
-    Integer price;
+    Double price;
     String description;
 }

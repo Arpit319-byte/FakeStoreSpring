@@ -12,12 +12,12 @@ import lombok.*;
 public class Product extends BaseEntity {
 
     private String title;
-    private Integer price;
+    private Double price;
     private String description;
     private String category;
     private String image;
-    private Integer ratingRate;
-    private Integer ratingCount;
+    private Double ratingRate;
+    private Double ratingCount;
 
     // Additional fields can be added as needed
 }
