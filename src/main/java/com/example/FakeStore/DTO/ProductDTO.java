@@ -11,6 +11,11 @@ public class ProductDTO {
 
     Long id;
     String title;
+    String image;
     Double price;
     String description;
+    String brand;
+    String model;
+    boolean popular;
+    double discount;
 }

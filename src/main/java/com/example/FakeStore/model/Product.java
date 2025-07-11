@@ -11,13 +11,16 @@ import lombok.*;
 @Entity
 public class Product extends BaseEntity {
 
-    private String title;
-    private Double price;
-    private String description;
-    private String category;
-    private String image;
-    private Double ratingRate;
-    private Double ratingCount;
+    Long id;
+    String title;
+    String image;
+    Double price;
+    String description;
+    String brand;
+    String model;
+    boolean popular;
+    double discount;
+
 
     // Additional fields can be added as needed
 }
