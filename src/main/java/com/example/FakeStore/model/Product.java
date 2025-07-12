@@ -1,7 +1,9 @@
 package com.example.FakeStore.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
@@ -9,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Product extends BaseEntity {
 
     Long id;
