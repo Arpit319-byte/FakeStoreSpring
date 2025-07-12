@@ -13,6 +13,7 @@ public class MapperClass {
 
     // Mapping ProductDTO to ProductEntity
     public static ProductDTO mapToProductDTO(Product product) {
+
         if (product == null) {
             return null;
         }
@@ -23,12 +24,32 @@ public class MapperClass {
                 .price(product.getPrice())
                 .description(product.getDescription())
                 .image(product.getImage())
+                .brand(product.getBrand())
+                .model(product.getModel())
+                .popular(product.isPopular())
+                .discount(product.getDiscount())
                 .build();
     }
 
-//     public FakeStoreCategoryResponseDTO mapToResponseDTO(List<CategoryDTO> categoryDTOs) {
-//         // Implement mapping logic here
-//
-//
-//     }
+    // Mapping ProductEntity to ProductDTO
+    public static Product mapToProductEntity(ProductDTO productDTO) {
+
+        if (productDTO == null) {
+            return null;
+        }
+
+        return Product.builder()
+                .id(productDTO.getId())
+                .title(productDTO.getTitle())
+                .price(productDTO.getPrice())
+                .description(productDTO.getDescription())
+                .image(productDTO.getImage())
+                .brand(productDTO.getBrand())
+                .model(productDTO.getModel())
+                .popular(productDTO.isPopular())
+                .discount(productDTO.getDiscount())
+                .build();
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.FakeStore.Service;
 
 import com.example.FakeStore.DTO.ProductDTO;
+import com.example.FakeStore.Mapper.MapperClass;
 import com.example.FakeStore.Repository.ProductRepository;
 import com.example.FakeStore.model.Product;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 
-@Service
+@Service("ProductService")
 public class ProductService implements IProductService {
     // This is a placeholder service implementation for ProductService.
 
@@ -23,13 +24,7 @@ public class ProductService implements IProductService {
         // This method fetches all products from the repository layer
         List<Product> products = productRepository.findAll();
        return products.stream()
-               .map(product -> ProductDTO.builder()
-                       .id(product.getId())
-                       .title(product.getTitle())
-                       .price(product.getPrice())
-//                       .category(product.getCategory())
-                       .description(product.getDescription())
-                       .build())
+               .map(MapperClass::mapToProductDTO)
                .toList();
     }
 
@@ -37,12 +32,7 @@ public class ProductService implements IProductService {
     public ProductDTO getProductById(long id) throws IOException {
         // This method can be implemented to fetch a product by its ID
         return productRepository.findById(id)
-                .map(product -> ProductDTO.builder()
-                        .id(product.getId())
-                        .title(product.getTitle())
-                        .price(product.getPrice())
-                        .description(product.getDescription())
-                        .build())
+                .map(MapperClass::mapToProductDTO)
                 .orElseThrow(() -> new IOException("Product not found for ID: " + id));
     }
 
@@ -54,18 +44,9 @@ public class ProductService implements IProductService {
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) throws IOException {
 
-        Product product = Product.builder()
-                .title(productDTO.getTitle())
-                .price(productDTO.getPrice())
-                .description(productDTO.getDescription())
-                .build();
-        Product savedProduct = productRepository.save(product);
-        return ProductDTO.builder()
-                .id(savedProduct.getId())
-                .title(savedProduct.getTitle())
-                .price(savedProduct.getPrice())
-                .description(savedProduct.getDescription())
-                .build();
+        Product product = MapperClass.mapToProductEntity(productDTO);
+        Product productSaved =productRepository.save(product);
+        return MapperClass.mapToProductDTO(productSaved);
     }
 
     @Override

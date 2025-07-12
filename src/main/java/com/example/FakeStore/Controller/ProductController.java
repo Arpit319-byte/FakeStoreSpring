@@ -2,6 +2,7 @@ package com.example.FakeStore.Controller;
 
 import com.example.FakeStore.DTO.ProductDTO;
 import com.example.FakeStore.Service.IProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class ProductController {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ProductController.class);
     private final IProductService iProductService;
 
-    public ProductController(IProductService _iProductService){
+    public ProductController(@Qualifier("ProductService") IProductService _iProductService){
       this.iProductService=_iProductService;
     }
 
