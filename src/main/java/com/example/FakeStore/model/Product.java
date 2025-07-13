@@ -2,6 +2,8 @@ package com.example.FakeStore.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -11,19 +13,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @Builder
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Product extends BaseEntity {
 
-    Long id;
-    String title;
-    String image;
-    Double price;
-    String description;
-    String brand;
-    String model;
-    boolean popular;
-    double discount;
+    private Long id;
+    private String title;
+    private String image;
+    private Double price;
+    private String description;
+    private String brand;
+    private String model;
+    private boolean popular;
+    private double discount;
 
-
-    // Additional fields can be added as needed
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }
