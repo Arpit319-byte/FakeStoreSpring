@@ -9,11 +9,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Geolocation{
+public class GeoLocationDTO{
 
-    @SerializedName("lat")
-    private Object lat;
+    private Double lat;
+    private Double lng;
 
-    @SerializedName("long")
-    private Object lon;
 }

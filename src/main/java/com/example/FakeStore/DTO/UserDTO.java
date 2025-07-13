@@ -11,21 +11,20 @@ import lombok.*;
 @Builder
 public class UserDTO {
 
+    @SerializedName("firstName")
+    private String firstName;
+
+    @SerializedName("lastName")
+    private String lastName;
 
     @SerializedName("password")
     private String password;
 
     @SerializedName("address")
-    private Address address;
+    private AddressDTO address;
 
     @SerializedName("phone")
     private String phone;
-
-    @SerializedName("name")
-    private Name name;
-
-    @SerializedName("id")
-    private Integer id;
 
     @SerializedName("email")
     private String email;

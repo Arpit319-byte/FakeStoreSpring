@@ -13,7 +13,7 @@ import lombok.*;
 public class GeoLocation {
 
     private Double lat;
-    private Double longitude;
+    private Double lng;
 
     @OneToOne(mappedBy = "geoLocation")
     private Address address;
