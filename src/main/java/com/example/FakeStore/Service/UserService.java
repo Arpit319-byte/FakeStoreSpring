@@ -1,7 +1,10 @@
 package com.example.FakeStore.Service;
 
 import com.example.FakeStore.DTO.UserDTO;
+import com.example.FakeStore.Mapper.MapperClass;
 import com.example.FakeStore.Repository.UserRepository;
+import com.example.FakeStore.model.User;
+import org.apache.catalina.mapper.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,12 +35,13 @@ public class UserService implements IUserService {
     @Override
     public UserDTO createUser(UserDTO userDTO) throws IOException {
         logger.info("Creating a new user in the UserService Layer");
-        UserDTO createdUser = userRepository.save(userDTO);
-        if (createdUser == null) {
-            logger.error("Failed to create user: {}", userDTO);
-            return null; // If the user creation fails, return null
+
+        if (userDTO == null) {
+            logger.error("UserDTO is null, cannot create user");
+            return null; // If the userDTO is null, return null
         }
-        return createdUser; // Return the created user
+        User createdUser = userRepository.save(MapperClass.mapToUserEntity(userDTO));
+        return MapperClass.mapToUserDTO(createdUser); // Return the created user
     }
 
     @Override

@@ -80,6 +80,24 @@ public class MapperClass {
                 .build();
     }
 
+    // Mapping UserEntity to UserDTO
+    public static UserDTO mapToUserDTO(User user) {
+
+        if (user == null) {
+            logger.warn("User entity is null, cannot map to UserDTO");
+            return null;
+        }
+
+        logger.info("Mapping User entity to UserDTO");
+        return UserDTO.builder()
+                .firstName(user.getFirstName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .username(user.getUsername())
+                .address(mapToAddressDTO(user.getAddress()))
+                .build();
+    }
+
     //Mapping AddressDTO to AddressEntity
     public static Address mapToAddressEntity(AddressDTO addressDTO) {
 
@@ -98,6 +116,24 @@ public class MapperClass {
                 .build();
     }
 
+    // Mapping AddressEntity to AddressDTO
+    public static AddressDTO mapToAddressDTO(Address address) {
+
+        if (address == null) {
+            logger.warn("Address entity is null, cannot map to AddressDTO");
+            return null;
+        }
+
+        logger.info("Mapping Address entity to AddressDTO");
+        return AddressDTO.builder()
+                .city(address.getCity())
+                .street(address.getStreet())
+                .number(address.getNumber())
+                .zipcode(address.getZipcode())
+                .geoLocation(mapToGeoLocationDTO(address.getGeolocation()))
+                .build();
+    }
+
     // Mapping GeoLocationDTO to GeoLocationEntity
     public static GeoLocation mapToGeoLocationEntity(GeoLocationDTO geoLocationDTO) {
 
@@ -112,6 +148,24 @@ public class MapperClass {
                 .lng(geoLocationDTO.getLng())
                 .build();
     }
+
+    // Mapping GeoLocationEntity to GeoLocationDTO
+
+    public static GeoLocationDTO mapToGeoLocationDTO(GeoLocation geoLocation) {
+
+        if (geoLocation == null) {
+            logger.warn("GeoLocation entity is null, cannot map to GeoLocationDTO");
+            return null;
+        }
+
+        logger.info("Mapping GeoLocation entity to GeoLocationDTO");
+        return GeoLocationDTO.builder()
+                .lat(geoLocation.getLat())
+                .lng(geoLocation.getLng())
+                .build();
+    }
+
+
 
 
 }
