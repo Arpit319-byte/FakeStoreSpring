@@ -27,18 +27,26 @@ class FakeStoreProductServiceTest {
     @InjectMocks
     private FakeStoreProductService fakeStoreProductService;
 
+    private ProductDTO product1;
+    private ProductDTO product2;
+    private List<ProductDTO> productList;
+    private List<ProductDTO> singleProductList;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         fakeStoreProductService = new FakeStoreProductService(productGateway, restTemplateGateway);
+
+        // Arrange common test data
+        product1 = ProductDTO.builder().title("Product 1").build();
+        product2 = ProductDTO.builder().title("Product 2").build();
+        productList = Arrays.asList(product1, product2);
+        singleProductList = Collections.singletonList(product1);
     }
 
     @Test
     void testGetAllProduct_ReturnsProductList() throws IOException {
-        ProductDTO product1 = ProductDTO.builder().title("Product 1").build();
-        ProductDTO product2 = ProductDTO.builder().title("Product 2").build();
-        List<ProductDTO> mockProducts = Arrays.asList(product1, product2);
-        when(restTemplateGateway.getAllProduct()).thenReturn(mockProducts);
+        when(restTemplateGateway.getAllProduct()).thenReturn(productList);
 
         List<ProductDTO> result = fakeStoreProductService.getAllProduct();
 
@@ -52,8 +60,7 @@ class FakeStoreProductServiceTest {
     @Test
     void testGetProductById_ReturnsProduct() throws IOException {
         long productId = 1L;
-        ProductDTO mockProduct = ProductDTO.builder().title("Product 1").build();
-        when(restTemplateGateway.getProductById(productId)).thenReturn(mockProduct);
+        when(restTemplateGateway.getProductById(productId)).thenReturn(product1);
 
         ProductDTO result = fakeStoreProductService.getProductById(productId);
 
@@ -64,40 +71,35 @@ class FakeStoreProductServiceTest {
 
     @Test
     void testGetProductByCategory_ReturnsProductList() throws IOException {
-        ProductDTO product1 = ProductDTO.builder().title("Category Product 1").build();
-        List<ProductDTO> mockProducts = Collections.singletonList(product1);
-        when(productGateway.getProductByCategory()).thenReturn(mockProducts);
+        when(productGateway.getProductByCategory()).thenReturn(singleProductList);
 
         List<ProductDTO> result = fakeStoreProductService.getProductByCategory();
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals("Category Product 1", result.get(0).getTitle());
+        assertEquals("Product 1", result.get(0).getTitle());
         verify(productGateway, times(1)).getProductByCategory();
     }
 
     @Test
     void testCreateProduct_ReturnsCreatedProduct() throws IOException {
-        ProductDTO inputProduct = ProductDTO.builder().title("New Product").build();
-        ProductDTO createdProduct = ProductDTO.builder().title("New Product").build();
-        when(productGateway.createProduct(inputProduct)).thenReturn(createdProduct);
+        when(productGateway.createProduct(product1)).thenReturn(product1);
 
-        ProductDTO result = fakeStoreProductService.createProduct(inputProduct);
+        ProductDTO result = fakeStoreProductService.createProduct(product1);
 
         assertNotNull(result);
-        assertEquals("New Product", result.getTitle());
-        verify(productGateway, times(1)).createProduct(inputProduct);
+        assertEquals("Product 1", result.getTitle());
+        verify(productGateway, times(1)).createProduct(product1);
     }
 
     @Test
     void testCreateProduct_ReturnsNullIfCreationFails() throws IOException {
-        ProductDTO inputProduct = ProductDTO.builder().title("Fail Product").build();
-        when(productGateway.createProduct(inputProduct)).thenReturn(null);
+        when(productGateway.createProduct(product2)).thenReturn(null);
 
-        ProductDTO result = fakeStoreProductService.createProduct(inputProduct);
+        ProductDTO result = fakeStoreProductService.createProduct(product2);
 
         assertNull(result);
-        verify(productGateway, times(1)).createProduct(inputProduct);
+        verify(productGateway, times(1)).createProduct(product2);
     }
 
     @Test
