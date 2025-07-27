@@ -1,15 +1,15 @@
 package com.example.FakeStore.Gateway;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
+
 import com.example.FakeStore.DTO.FakeStoreSingleUserResponseDTO;
 import com.example.FakeStore.DTO.FakeStoreUserResponseDTO;
 import com.example.FakeStore.DTO.UserDTO;
 import com.example.FakeStore.Gateway.Api.FakeStoreUserApi;
-import com.example.FakeStore.Mapper.MapperClass;
-import org.slf4j.Logger;
-import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.List;
 
 @Component
 public class FakeStoreUserGateway implements IUserGateway {
@@ -118,6 +118,15 @@ public class FakeStoreUserGateway implements IUserGateway {
             return List.of(); // Return an empty list if the response is null
         }
 
-        return response.getUsers();
+        return response.getUsers().stream().map(
+                        user -> UserDTO.builder()
+                                .email(user.getEmail())
+                                .username(user.getUsername())
+                                .password(user.getPassword())
+                                .firstName(user.getFirstName())
+                                .address(user.getAddress())
+                                .phone(user.getPhone())
+                                .build())
+                .toList();
     }
 }

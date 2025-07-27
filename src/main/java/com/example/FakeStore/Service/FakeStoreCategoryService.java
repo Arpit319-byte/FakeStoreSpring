@@ -1,16 +1,14 @@
 package com.example.FakeStore.Service;
 
-import com.example.FakeStore.Controller.CategoryController;
-import com.example.FakeStore.DTO.CategoryDTO;
-import com.example.FakeStore.Gateway.FakeStoreCategoryGateway;
-import com.example.FakeStore.Gateway.ICategoryGateway;
+import java.io.IOException;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.FakeStore.DTO.CategoryDTO;
+import com.example.FakeStore.Gateway.ICategoryGateway;
 
 @Service
 public class FakeStoreCategoryService implements ICategoryService {
