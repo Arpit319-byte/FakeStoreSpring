@@ -49,7 +49,6 @@ public class MapperClass {
 
         logger.info("Mapping ProductDTO to Product entity");
         return Product.builder()
-                .id(productDTO.getId())
                 .title(productDTO.getTitle())
                 .price(productDTO.getPrice())
                 .description(productDTO.getDescription())

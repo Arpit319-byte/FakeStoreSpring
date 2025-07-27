@@ -1,7 +1,6 @@
 package com.example.FakeStore.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Entity
@@ -10,12 +9,9 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
-public class GeoLocation {
+public class GeoLocation extends BaseEntity {
 
     private Double lat;
     private Double lng;
-
-    @OneToOne(mappedBy = "geoLocation")
-    private Address address;
 
 }

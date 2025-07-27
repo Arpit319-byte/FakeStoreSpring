@@ -2,6 +2,7 @@ package com.example.FakeStore.Controller;
 
 import com.example.FakeStore.DTO.UserDTO;
 import com.example.FakeStore.Service.IUserService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class UserController {
         }
 
      @PostMapping
-     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) throws IOException {
+     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) throws IOException {
 
          // This method can be implemented to create a new user
          logger.info("Creating a new user in the UserController Layer");
@@ -64,7 +65,7 @@ public class UserController {
      }
 
      @PutMapping("/{id}")
-     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) throws IOException {
+     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO) throws IOException {
          // This method can be implemented to update a user by their ID
          logger.info("Updating user with ID {} in the UserController Layer", id);
          UserDTO updatedUser = userService.updateUserById(id, userDTO);

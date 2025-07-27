@@ -16,15 +16,15 @@ import java.util.List;
 public class FakeStoreCategoryService implements ICategoryService {
 
     private static final Logger logger = LoggerFactory.getLogger(FakeStoreCategoryService.class);
-    private final ICategoryGateway iCategoryGateway;
+    private final ICategoryGateway categoryGateway;
 
-    public FakeStoreCategoryService(ICategoryGateway _iCategoryGateway) {
-        this.iCategoryGateway = _iCategoryGateway;
+    public FakeStoreCategoryService(ICategoryGateway categoryGateway) {
+        this.categoryGateway = categoryGateway;
     }
 
     @Override
     public List<CategoryDTO> getAllCategory() throws IOException {
         logger.info("Fetching the Category list from the GatewayLayer");
-        return iCategoryGateway.getAllCategories();
+        return categoryGateway.getAllCategories();
     }
 }

@@ -4,6 +4,7 @@ import com.example.FakeStore.DTO.FakeStoreSingleUserResponseDTO;
 import com.example.FakeStore.DTO.FakeStoreUserResponseDTO;
 import com.example.FakeStore.DTO.UserDTO;
 import com.example.FakeStore.Gateway.Api.FakeStoreUserApi;
+import com.example.FakeStore.Mapper.MapperClass;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -41,11 +42,10 @@ public class FakeStoreUserGateway implements IUserGateway {
 
         return response.getUsers().stream().map(
                         user -> UserDTO.builder()
-                                .id(user.getId())
                                 .email(user.getEmail())
                                 .username(user.getUsername())
                                 .password(user.getPassword())
-                                .name(user.getName())
+                                .firstName(user.getFirstName())
                                 .address(user.getAddress())
                                 .phone(user.getPhone())
                                 .build())
@@ -118,16 +118,6 @@ public class FakeStoreUserGateway implements IUserGateway {
             return List.of(); // Return an empty list if the response is null
         }
 
-        return response.getUsers().stream().map(
-                        user -> UserDTO.builder()
-                                .id(user.getId())
-                                .email(user.getEmail())
-                                .username(user.getUsername())
-                                .password(user.getPassword())
-                                .name(user.getName())
-                                .address(user.getAddress())
-                                .phone(user.getPhone())
-                                .build())
-                .toList();
+        return response.getUsers();
     }
 }

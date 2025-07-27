@@ -12,19 +12,19 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/Product/Category")
+@RequestMapping("api/v1/categories")
 public class CategoryController {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
-    private final ICategoryService iCategoryService;
+    private final ICategoryService categoryService;
 
-    public CategoryController(ICategoryService _iCategoryService){
-        this.iCategoryService=_iCategoryService;
+    public CategoryController(ICategoryService categoryService){
+        this.categoryService = categoryService;
     }
 
     @GetMapping
     public List<CategoryDTO> getAllCategories() throws IOException {
         logger.info("Fetching the all the Categories from the FakeStoreService Layer");
-        return iCategoryService.getAllCategory();
+        return categoryService.getAllCategory();
     }
 }
