@@ -24,12 +24,19 @@ public class UserService implements IUserService {
 
     @Override
     public List<UserDTO> getAllUsers() throws IOException {
-        return List.of();
+
+        logger.info("Fetching all users from the UserService Layer");
+        List<User> users = userRepository.findAll();
+        List<UserDTO> userDTOs = users.stream().map(MapperClass::mapToUserDTO).toList();
+        logger.info("Fetched {} users from the UserService Layer", userDTOs.size());
+        return userDTOs;
     }
 
     @Override
     public UserDTO getUserById(Long id) throws IOException {
-        return null;
+        logger.info("Fetching user by ID from the UserService Layer");
+        User user = userRepository.findById(id).orElseThrow(() -> new IOException("User not found for ID: " + id));
+        return MapperClass.mapToUserDTO(user);
     }
 
     @Override
@@ -46,16 +53,31 @@ public class UserService implements IUserService {
 
     @Override
     public boolean deleteUserById(Long id) throws IOException {
-        return false;
+        logger.info("Deleting user by ID from the UserService Layer");
+        userRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public UserDTO updateUserById(Long id, UserDTO userDTO) throws IOException {
-        return null;
+        logger.info("Updating user by ID from the UserService Layer");
+
+        User user = userRepository.findById(id).orElseThrow(() -> new IOException("User not found for ID: " + id));
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setPhone(userDTO.getPhone());
+        return MapperClass.mapToUserDTO(userRepository.save(user));
     }
 
     @Override
     public List<UserDTO> getLimitedUsers(int limit) throws IOException {
-        return List.of();
+        logger.info("Fetching limited users from the UserService Layer with limit: {}", limit);
+        List<User> users = userRepository.findAll();
+        List<UserDTO> userDTOs = users.stream().map(MapperClass::mapToUserDTO).toList();
+        List<UserDTO> limitedUsers = userDTOs.subList(0, limit);
+        logger.info("Fetched {} limited users from the UserService Layer", limitedUsers.size());
+        return limitedUsers;
     }
 }
